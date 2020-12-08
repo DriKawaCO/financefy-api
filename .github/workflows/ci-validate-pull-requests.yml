@@ -29,6 +29,7 @@ jobs:
       # Validates the repository
       - name: check-commit
         run: |
+          npm install
           npm run test
           npm run lint
         # env:
