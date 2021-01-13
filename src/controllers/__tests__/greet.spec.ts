@@ -1,5 +1,5 @@
 import request from 'supertest';
-import Server from '../startup/server.js';
+import Server from '../../startup/server.js';
 
 describe('[API] Greet Route Test Suite', () => {
     let server: Server;
@@ -40,7 +40,7 @@ describe('[API] Greet Route Test Suite', () => {
                 expect(response.body.message).toBe('Greeted successfully!');
 
                 request(baseUrl)
-                    .get('/last-greet')
+                    .get('/greet/last-greet')
                     .end((lastGreetError, lastGreetResponse) => {
                         expect(lastGreetResponse.status).toEqual(200);
                         expect(lastGreetResponse.body.lastGreeting).toBe('GoodAfternoon');
@@ -61,7 +61,7 @@ describe('[API] Greet Route Test Suite', () => {
                 expect(response.body.message).toBe('Greeted successfully!');
 
                 request(baseUrl)
-                    .get('/last-speaker')
+                    .get('/greet/last-speaker')
                     .end((lastSpeakerError, lastSpeakerResponse) => {
                         expect(lastSpeakerResponse.status).toEqual(200);
                         expect(lastSpeakerResponse.body.lastSpeaker).toBe('Adrian');
@@ -82,7 +82,7 @@ describe('[API] Greet Route Test Suite', () => {
                 expect(response.body.message).toBe('Greeted successfully!');
 
                 request(baseUrl)
-                    .get('/last-talk')
+                    .get('/greet/last-talk')
                     .end((lastTalkError, lastTalkResponse) => {
                         const talk = 'Excuse me... Sir Jane would like to say: GoodBye';
                         expect(lastTalkResponse.status).toEqual(200);

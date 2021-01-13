@@ -1,5 +1,5 @@
 import Greeter from './greeter.js';
-import { IGreet } from '../interfaces/index.js';
+import { Greet } from '../interfaces/index.js';
 import { Greetings } from '../enum/index.js';
 
 describe('[Unit] Greet Service Test Suite', () => {
@@ -11,7 +11,7 @@ describe('[Unit] Greet Service Test Suite', () => {
     it('should greet, with proper params', () => {
         const talk = `Excuse me... Sir Jaime would like to say: ${Greetings.GoodEvening}`;
         const greeter = new Greeter();
-        const greet: IGreet = {
+        const greet: Greet = {
             greeting: Greetings.GoodEvening,
             speaker: 'Jaime'
         };
@@ -23,7 +23,7 @@ describe('[Unit] Greet Service Test Suite', () => {
 
     it('should throw an Error, greeting with no speaker', () => {
         const greeter = new Greeter();
-        const greet: IGreet = {
+        const greet: Greet = {
             greeting: Greetings.GoodEvening,
             speaker: ''
         };

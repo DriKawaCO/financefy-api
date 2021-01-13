@@ -1,2 +1,2 @@
-export { default as IGreet } from './greet.js';
-export { default as IRoute } from './route.js';
+export { default as Greet } from './greet.js';
+export { default as Route } from './route.js';

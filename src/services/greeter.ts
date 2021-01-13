@@ -1,5 +1,5 @@
 import { Greetings } from '../enum/index.js';
-import { IGreet } from '../interfaces/index.js';
+import { Greet } from '../interfaces/index.js';
 
 class Greeter {
     private lastGreeting: Greetings | null;
@@ -12,7 +12,7 @@ class Greeter {
         this.lastTalk = '';
     }
 
-    greet(greet: IGreet) : string {
+    greet(greet: Greet) : string {
         if (!(greet.greeting in Greetings)) {
             throw new Error(`To greet someone, you must say one of the following: ${Object.keys(Greetings).join(',')}`);
         }
