@@ -1,7 +1,9 @@
-import { Request, Response } from 'express';
-import { Greet } from '../interfaces/index.js';
-import { Greeter } from '../services/index.js';
 import {Controller, Get, Post} from '../decorators/index.js';
+import {Request, Response} from 'express';
+
+import {Greet} from '../interfaces/index.js';
+import {Greeter} from '../services/index.js';
+import {Greetings} from '../enum/index.js';
 
 @Controller('/greet')
 export default class HelloWorld {
@@ -16,34 +18,33 @@ export default class HelloWorld {
         try {
             const greet: Greet = {
                 greeting: req.body.greeting,
-                speaker: req.body.speaker
+                speaker: req.body.speaker,
             };
             this.greeterService.greet(greet);
-            return res.json({ message: 'Greeted successfully!' });
-        }
-        catch (error) {
+            return {message: 'Greeted successfully!'};
+        } catch (error) {
             res.status(400).json({
-                message: 'Couldn\'t greet.',
-                reason: JSON.stringify(error)
+                message: "Couldn't greet.",
+                reason: JSON.stringify(error),
             });
         }
-    }
+    };
 
     @Get('/last-greet')
-    public getLastGreet = (_: Request, res: Response): void => {
+    public getLastGreet = (_: Request, res: Response): Greetings | null => {
         const lastGreeting = this.greeterService.getLastGreeting();
-        res.json({ lastGreeting });
-    }
+        return lastGreeting;
+    };
 
     @Get('/last-speaker')
-    public getLastSpeaker = (_: Request, res: Response): void => {
+    public getLastSpeaker = (_: Request, res: Response): string => {
         const lastSpeaker = this.greeterService.getLastSpeaker();
-        res.json({ lastSpeaker });
-    }
+        return lastSpeaker;
+    };
 
     @Get('/last-talk')
-    public getLastTalk = (_: Request, res: Response): void => {
+    public getLastTalk = (_: Request, res: Response): string => {
         const lastTalk = this.greeterService.getLastTalk();
-        res.json({ lastTalk });
-    }
+        return lastTalk;
+    };
 }
