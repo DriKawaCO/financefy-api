@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import bodyParser from 'body-parser';
-import express, {Express} from 'express';
+import express, { Express } from 'express';
 import cors from 'cors';
 import RoutesBinder from './routes-binder.js';
 

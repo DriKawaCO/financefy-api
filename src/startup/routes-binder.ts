@@ -1,7 +1,7 @@
-import express, {Request, Response, Router} from 'express';
+import express, { Request, Response, Router } from 'express';
 
 import Controllers from '../controllers/index.js';
-import {Route} from '../interfaces/index.js';
+import { Route } from '../interfaces/index.js';
 
 const getKeyValue = (key: string) => (obj: Record<string, any>) => obj[key];
 

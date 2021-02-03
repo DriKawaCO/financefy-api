@@ -1,6 +1,8 @@
+import { Injectable } from '../decorators/index.js';
 import { Greetings } from '../enum/index.js';
 import { Greet } from '../interfaces/index.js';
 
+@Injectable()
 class Greeter {
     private lastGreeting: Greetings | null;
     private lastSpeaker: string;
@@ -12,7 +14,7 @@ class Greeter {
         this.lastTalk = '';
     }
 
-    greet(greet: Greet) : string {
+    greet(greet: Greet): string {
         if (!(greet.greeting in Greetings)) {
             throw new Error(`To greet someone, you must say one of the following: ${Object.keys(Greetings).join(',')}`);
         }
@@ -27,15 +29,15 @@ class Greeter {
         return this.lastTalk;
     }
 
-    getLastGreeting() : Greetings | null {
+    getLastGreeting(): Greetings | null {
         return this.lastGreeting;
     }
 
-    getLastSpeaker() : string {
+    getLastSpeaker(): string {
         return this.lastSpeaker;
     }
 
-    getLastTalk() : string {
+    getLastTalk(): string {
         return this.lastTalk;
     }
 }

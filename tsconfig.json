@@ -11,7 +11,9 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
-    "types": ["node", "jest"]
+    "emitDecoratorMetadata": true,
+    "types": ["node", "reflect-metadata", "jest"],
+    "strictPropertyInitialization": false
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

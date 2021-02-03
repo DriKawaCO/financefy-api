@@ -1,10 +1,15 @@
-import {Controller, Get} from '../decorators/index.js';
-import {Request, Response} from 'express';
+import { Controller, Get, Inject } from '../decorators/index.js';
+import { Greeter } from '../services/index.js';
+import { Injectables } from '../constants/index.js';
+import { Request, Response } from 'express';
 
 @Controller('/account')
 export default class Account {
+    @Inject(Injectables.Greeter)
+    private greeterService: Greeter;
+
     @Get()
-    public createAccount = (req: Request, res: Response): void => {
-        res.send('Ok');
+    public createAccount = (): string => {
+        return this.greeterService.getLastTalk();
     };
 }

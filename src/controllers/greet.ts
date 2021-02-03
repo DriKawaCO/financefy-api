@@ -1,17 +1,15 @@
-import {Controller, Get, Post} from '../decorators/index.js';
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 
-import {Greet} from '../interfaces/index.js';
-import {Greeter} from '../services/index.js';
-import {Greetings} from '../enum/index.js';
+import { Controller, Get, Post, Inject } from '../decorators/index.js';
+import { Greet } from '../interfaces/index.js';
+import { Greeter } from '../services/index.js';
+import { Injectables } from '../constants/index.js';
+import { Greetings } from '../enum/index.js';
 
 @Controller('/greet')
 export default class HelloWorld {
-    public greeterService: Greeter;
-
-    constructor() {
-        this.greeterService = new Greeter();
-    }
+    @Inject(Injectables.Greeter)
+    private greeterService: Greeter;
 
     @Post()
     public greet = (req: Request, res: Response): any => {
@@ -21,7 +19,7 @@ export default class HelloWorld {
                 speaker: req.body.speaker,
             };
             this.greeterService.greet(greet);
-            return {message: 'Greeted successfully!'};
+            return { message: 'Greeted successfully!' };
         } catch (error) {
             res.status(400).json({
                 message: "Couldn't greet.",
@@ -31,20 +29,17 @@ export default class HelloWorld {
     };
 
     @Get('/last-greet')
-    public getLastGreet = (_: Request, res: Response): Greetings | null => {
-        const lastGreeting = this.greeterService.getLastGreeting();
-        return lastGreeting;
+    public getLastGreet = (): Greetings | null => {
+        return this.greeterService.getLastGreeting();
     };
 
     @Get('/last-speaker')
-    public getLastSpeaker = (_: Request, res: Response): string => {
-        const lastSpeaker = this.greeterService.getLastSpeaker();
-        return lastSpeaker;
+    public getLastSpeaker = (): string => {
+        return this.greeterService.getLastSpeaker();
     };
 
     @Get('/last-talk')
-    public getLastTalk = (_: Request, res: Response): string => {
-        const lastTalk = this.greeterService.getLastTalk();
-        return lastTalk;
+    public getLastTalk = (): string => {
+        return this.greeterService.getLastTalk();
     };
 }
