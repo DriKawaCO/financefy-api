@@ -1,1 +1,2 @@
-export { default as Injectables } from './injectables.js';
+export * from './injectables.constant.js';
+export * from './route.constant.js';

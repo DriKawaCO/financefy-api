@@ -1,7 +1,7 @@
 import {RouteParam} from '../interfaces/index.js';
 import {RouteParamType} from '../enum/index.js';
 
-function routeParamBuilder(paramType: RouteParamType, target: any, propertyKey: string, index: number) {
+function routeParamBuilder(type: RouteParamType, target: any, propertyKey: string, index: number, pathName?: string) {
     if (!Reflect.hasMetadata('routeParams', target.constructor)) {
         Reflect.defineMetadata('routeParams', [], target.constructor);
     }
@@ -16,7 +16,8 @@ function routeParamBuilder(paramType: RouteParamType, target: any, propertyKey: 
             params: [
                 {
                     index,
-                    type: paramType,
+                    type,
+                    pathName,
                 },
             ],
         };
@@ -24,7 +25,8 @@ function routeParamBuilder(paramType: RouteParamType, target: any, propertyKey: 
     } else {
         requestRouteParam.params.push({
             index,
-            type: paramType,
+            type,
+            pathName,
         });
         routeParams[requestRouteParamIdx] = requestRouteParam;
     }
@@ -53,5 +55,11 @@ export const Body = () => {
 export const Query = () => {
     return (target: any, propertyKey: string, index: number): void => {
         routeParamBuilder(RouteParamType.QUERY, target, propertyKey, index);
+    };
+};
+
+export const Path = (pathName: string) => {
+    return (target: any, propertyKey: string, index: number): void => {
+        routeParamBuilder(RouteParamType.PATH, target, propertyKey, index, pathName);
     };
 };

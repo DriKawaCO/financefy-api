@@ -1,5 +1,5 @@
-import request from 'supertest';
 import Server from '../../startup/server.js';
+import request from 'supertest';
 
 describe('[API] Greet Route Test Suite', () => {
     let server: Server;
@@ -14,12 +14,12 @@ describe('[API] Greet Route Test Suite', () => {
         server.stop();
     });
 
-    it('should request greet, with proper params', done => {
+    it('should request greet, with proper params', (done) => {
         request(baseUrl)
             .post('/greet')
             .send({
                 greeting: 'Hello',
-                speaker: 'John'
+                speaker: 'John',
             })
             .end((_, response) => {
                 expect(response.status).toEqual(200);
@@ -28,12 +28,12 @@ describe('[API] Greet Route Test Suite', () => {
             });
     });
 
-    it('should greet and get last greeting', done => {
+    it('should greet and get last greeting', (done) => {
         request(baseUrl)
             .post('/greet')
             .send({
                 greeting: 'GoodAfternoon',
-                speaker: 'Ashley'
+                speaker: 'Ashley',
             })
             .end((error, response) => {
                 expect(response.status).toEqual(200);
@@ -49,12 +49,12 @@ describe('[API] Greet Route Test Suite', () => {
             });
     });
 
-    it('should greet and get last speaker', done => {
+    it('should greet and get last speaker', (done) => {
         request(baseUrl)
             .post('/greet')
             .send({
                 greeting: 'GoodNight',
-                speaker: 'Adrian'
+                speaker: 'Adrian',
             })
             .end((error, response) => {
                 expect(response.status).toEqual(200);
@@ -70,12 +70,12 @@ describe('[API] Greet Route Test Suite', () => {
             });
     });
 
-    it('should greet and get last talk', done => {
+    it('should greet and get last talk', (done) => {
         request(baseUrl)
             .post('/greet')
             .send({
                 greeting: 'GoodBye',
-                speaker: 'Jane'
+                speaker: 'Jane',
             })
             .end((error, response) => {
                 expect(response.status).toEqual(200);
@@ -92,54 +92,56 @@ describe('[API] Greet Route Test Suite', () => {
             });
     });
 
-    it('should request greet, sending String', done => {
+    it('should request greet, sending String', (done) => {
         request(baseUrl)
             .post('/greet')
             .send('GoodMorning')
             .end((_, response) => {
                 expect(response.status).toEqual(400);
-                expect(response.body.message).toBe('Couldn\'t greet.');
+                expect(response.body.message).toBe("Couldn't greet.");
                 done();
             });
     });
 
-    it('should request greet, sending wrong Greeting', done => {
+    it('should request greet, sending wrong Greeting', (done) => {
         request(baseUrl)
             .post('/greet')
             .send({
                 greeting: 'foo',
-                speaker: 'John'
+                speaker: 'John',
             })
             .end((_, response) => {
                 expect(response.status).toEqual(400);
-                expect(response.body.message).toBe('Couldn\'t greet.');
+                expect(response.body.message).toBe("Couldn't greet.");
                 done();
             });
     });
 
-    it('should request greet, not sending speaker', done => {
+    it('should request greet, not sending speaker', (done) => {
         request(baseUrl)
             .post('/greet')
             .send({
-                greeting: 'GoodMorning'
+                greeting: 'GoodMorning',
             })
             .end((_, response) => {
                 expect(response.status).toEqual(400);
-                expect(response.body.message).toBe('Couldn\'t greet.');
+                expect(response.body.message).toBe("Couldn't greet.");
                 done();
             });
     });
 
-    it('should request greet, sending Array', done => {
+    it('should request greet, sending Array', (done) => {
         request(baseUrl)
             .post('/greet')
-            .send([{
-                greeting: 'GoodAfternoon',
-                speaker: 'John'
-            }])
+            .send([
+                {
+                    greeting: 'GoodAfternoon',
+                    speaker: 'John',
+                },
+            ])
             .end((_, response) => {
                 expect(response.status).toEqual(400);
-                expect(response.body.message).toBe('Couldn\'t greet.');
+                expect(response.body.message).toBe("Couldn't greet.");
                 done();
             });
     });

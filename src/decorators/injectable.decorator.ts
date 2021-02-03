@@ -1,9 +1,8 @@
-import DIService from '../services/dependency-injector.js';
-import { Injectables } from '../constants/index.js';
+import DependencyInjector from '../utils/dependency-injector.js';
 
 export const Injectable = (): ClassDecorator => {
     return (target: any) => {
-        DIService.add({ identifier: Injectables.Greeter, service: target });
+        DependencyInjector.add({identifier: Symbol.for(target.name), service: target});
         return target;
     };
 };

@@ -1,5 +1,4 @@
-import AccountController from './account.js';
-import GreetController from './greet.js';
+import AccountController from './account.controller.js';
+import GreetController from './greet.controller.js';
 
-export {AccountController, GreetController};
 export default [AccountController, GreetController];

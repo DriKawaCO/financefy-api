@@ -1,8 +1,10 @@
 import { Greetings } from '../enum/index.js';
 
-interface Greet {
+export interface Greet {
     greeting: Greetings,
     speaker: string
 }
 
-export default Greet;
+export interface GreetResponse {
+    message: string;
+}

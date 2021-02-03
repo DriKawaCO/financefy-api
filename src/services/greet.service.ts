@@ -1,9 +1,9 @@
-import { Injectable } from '../decorators/index.js';
-import { Greetings } from '../enum/index.js';
-import { Greet } from '../interfaces/index.js';
+import {Greet} from '../interfaces/index.js';
+import {Greetings} from '../enum/index.js';
+import {Injectable} from '../decorators/index.js';
 
 @Injectable()
-class Greeter {
+class GreetService {
     private lastGreeting: Greetings | null;
     private lastSpeaker: string;
     private lastTalk: string;
@@ -14,7 +14,11 @@ class Greeter {
         this.lastTalk = '';
     }
 
-    greet(greet: Greet): string {
+    /**
+     * Method for Greeting people
+     * @param greet
+     */
+    public greet(greet: Greet): string {
         if (!(greet.greeting in Greetings)) {
             throw new Error(`To greet someone, you must say one of the following: ${Object.keys(Greetings).join(',')}`);
         }
@@ -29,17 +33,26 @@ class Greeter {
         return this.lastTalk;
     }
 
-    getLastGreeting(): Greetings | null {
+    /**
+     * Get the Last Greeting
+     */
+    public getLastGreeting(): Greetings | null {
         return this.lastGreeting;
     }
 
-    getLastSpeaker(): string {
+    /**
+     * Get the Last Speaker
+     */
+    public getLastSpeaker(): string {
         return this.lastSpeaker;
     }
 
-    getLastTalk(): string {
+    /**
+     * Get the Last Talk
+     */
+    public getLastTalk(): string {
         return this.lastTalk;
     }
 }
 
-export default Greeter;
+export default GreetService;

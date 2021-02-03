@@ -1,8 +1,10 @@
 import 'reflect-metadata';
+
+import express, {Express} from 'express';
+
+import BindRoutes from '../utils/routes-binder.js';
 import bodyParser from 'body-parser';
-import express, { Express } from 'express';
 import cors from 'cors';
-import RoutesBinder from './routes-binder.js';
 
 class App {
     public express: Express;
@@ -10,7 +12,7 @@ class App {
     constructor() {
         this.express = express();
         this.configureCors();
-        this.bindRoutes();
+        this.express.use('/', BindRoutes());
     }
 
     private configureCors(): void {
@@ -26,10 +28,6 @@ class App {
             }),
         );
         this.express.use(cors());
-    }
-
-    private bindRoutes(): void {
-        this.express.use('/', RoutesBinder());
     }
 }
 
