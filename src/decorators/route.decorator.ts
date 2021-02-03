@@ -1,5 +1,5 @@
-import { RouteMethods } from '../enum/index.js';
-import { Route } from '../interfaces/index.js';
+import {Route} from '../interfaces/index.js';
+import {RouteMethods} from '../enum/index.js';
 
 function routeBuilder(path: string, method: RouteMethods, target: any, propertyKey: string) {
     if (!Reflect.hasMetadata('routes', target.constructor)) {
@@ -11,7 +11,7 @@ function routeBuilder(path: string, method: RouteMethods, target: any, propertyK
     routes.push({
         requestMethod: method,
         path,
-        methodName: propertyKey
+        methodName: propertyKey,
     });
     Reflect.defineMetadata('routes', routes, target.constructor);
 }
