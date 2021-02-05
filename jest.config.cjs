@@ -1,5 +1,7 @@
 module.exports = {
-    testEnvironment: 'node',
+    globalSetup: './jest.setup.cjs',
+    globalTeardown: './jest.teardown.cjs',
+    testEnvironment: './mongo-environment.cjs',
     roots: ['<rootDir>/dist'],
     transform: {
         '^.+\\.jsx?$': 'babel-jest'

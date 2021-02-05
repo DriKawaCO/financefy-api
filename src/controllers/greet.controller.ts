@@ -1,10 +1,10 @@
-import {Response} from 'express';
+import { Response } from 'express';
 
-import {Controller, Get, Post, Inject, Res, Body} from '../decorators/index.js';
-import {Greet, GreetResponse} from '../interfaces/index.js';
-import {GreetService} from '../services/index.js';
-import {Injectables} from '../constants/index.js';
-import {Greetings} from '../enum/index.js';
+import { Controller, Get, Post, Inject, Res, Body } from '../decorators/index.js';
+import { Greet, GreetResponse } from '../interfaces/index.js';
+import { GreetService } from '../services/index.js';
+import { Injectables } from '../constants/index.js';
+import { Greetings } from '../enum/index.js';
 
 @Controller('/greet')
 export default class GreetController {
@@ -16,11 +16,12 @@ export default class GreetController {
         try {
             const greet: Greet = body;
             this.greetService.greet(greet);
-            return {message: 'Greeted successfully!'};
-        } catch (error) {
+            return { message: 'Greeted successfully!' };
+        }
+        catch (error) {
             res.status(400).json({
-                message: "Couldn't greet.",
-                reason: JSON.stringify(error),
+                message: 'Couldn\'t greet.',
+                reason: JSON.stringify(error)
             });
         }
     }

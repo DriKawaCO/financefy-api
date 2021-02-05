@@ -5,9 +5,9 @@ describe('[API] Greet Route Test Suite', () => {
     let server: Server;
     const baseUrl = 'http://localhost:3000';
 
-    beforeAll(() => {
+    beforeAll(async () => {
         server = new Server();
-        server.startup();
+        await server.startup();
     });
 
     afterAll(() => {
@@ -22,7 +22,7 @@ describe('[API] Greet Route Test Suite', () => {
                 speaker: 'John',
             })
             .end((_, response) => {
-                expect(response.status).toEqual(200);
+                expect(response.status).toEqual(201);
                 expect(response.body.message).toBe('Greeted successfully!');
                 done();
             });
@@ -36,14 +36,14 @@ describe('[API] Greet Route Test Suite', () => {
                 speaker: 'Ashley',
             })
             .end((error, response) => {
-                expect(response.status).toEqual(200);
+                expect(response.status).toEqual(201);
                 expect(response.body.message).toBe('Greeted successfully!');
 
                 request(baseUrl)
                     .get('/greet/last-greet')
                     .end((lastGreetError, lastGreetResponse) => {
                         expect(lastGreetResponse.status).toEqual(200);
-                        expect(lastGreetResponse.body.lastGreeting).toBe('GoodAfternoon');
+                        expect(lastGreetResponse.text).toBe('GoodAfternoon');
                         done();
                     });
             });
@@ -57,14 +57,14 @@ describe('[API] Greet Route Test Suite', () => {
                 speaker: 'Adrian',
             })
             .end((error, response) => {
-                expect(response.status).toEqual(200);
+                expect(response.status).toEqual(201);
                 expect(response.body.message).toBe('Greeted successfully!');
 
                 request(baseUrl)
                     .get('/greet/last-speaker')
                     .end((lastSpeakerError, lastSpeakerResponse) => {
                         expect(lastSpeakerResponse.status).toEqual(200);
-                        expect(lastSpeakerResponse.body.lastSpeaker).toBe('Adrian');
+                        expect(lastSpeakerResponse.text).toBe('Adrian');
                         done();
                     });
             });
@@ -78,7 +78,7 @@ describe('[API] Greet Route Test Suite', () => {
                 speaker: 'Jane',
             })
             .end((error, response) => {
-                expect(response.status).toEqual(200);
+                expect(response.status).toEqual(201);
                 expect(response.body.message).toBe('Greeted successfully!');
 
                 request(baseUrl)
@@ -86,7 +86,7 @@ describe('[API] Greet Route Test Suite', () => {
                     .end((lastTalkError, lastTalkResponse) => {
                         const talk = 'Excuse me... Sir Jane would like to say: GoodBye';
                         expect(lastTalkResponse.status).toEqual(200);
-                        expect(lastTalkResponse.body.lastTalk).toBe(talk);
+                        expect(lastTalkResponse.text).toBe(talk);
                         done();
                     });
             });
@@ -98,7 +98,7 @@ describe('[API] Greet Route Test Suite', () => {
             .send('GoodMorning')
             .end((_, response) => {
                 expect(response.status).toEqual(400);
-                expect(response.body.message).toBe("Couldn't greet.");
+                expect(response.body.message).toBe('Couldn't greet.');
                 done();
             });
     });
@@ -112,7 +112,7 @@ describe('[API] Greet Route Test Suite', () => {
             })
             .end((_, response) => {
                 expect(response.status).toEqual(400);
-                expect(response.body.message).toBe("Couldn't greet.");
+                expect(response.body.message).toBe('Couldn't greet.');
                 done();
             });
     });
@@ -125,7 +125,7 @@ describe('[API] Greet Route Test Suite', () => {
             })
             .end((_, response) => {
                 expect(response.status).toEqual(400);
-                expect(response.body.message).toBe("Couldn't greet.");
+                expect(response.body.message).toBe('Couldn't greet.');
                 done();
             });
     });
@@ -141,7 +141,7 @@ describe('[API] Greet Route Test Suite', () => {
             ])
             .end((_, response) => {
                 expect(response.status).toEqual(400);
-                expect(response.body.message).toBe("Couldn't greet.");
+                expect(response.body.message).toBe('Couldn't greet.');
                 done();
             });
     });

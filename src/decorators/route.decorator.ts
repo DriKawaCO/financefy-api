@@ -1,7 +1,19 @@
-import {Route} from '../interfaces/index.js';
-import {RouteMethods} from '../enum/index.js';
+import { Route } from '../interfaces/index.js';
+import { RouteMethods } from '../enum/index.js';
 
-function routeBuilder(path: string, method: RouteMethods, target: any, propertyKey: string) {
+type RouteBuilder = {
+    path: string,
+    method: RouteMethods,
+    target: any,
+    propertyKey: string
+};
+
+function routeBuilder({
+    path,
+    method,
+    target,
+    propertyKey
+}: RouteBuilder) {
     if (!Reflect.hasMetadata('routes', target.constructor)) {
         Reflect.defineMetadata('routes', [], target.constructor);
     }
@@ -11,31 +23,51 @@ function routeBuilder(path: string, method: RouteMethods, target: any, propertyK
     routes.push({
         requestMethod: method,
         path,
-        methodName: propertyKey,
+        methodName: propertyKey
     });
     Reflect.defineMetadata('routes', routes, target.constructor);
 }
 
 export const Get = (path = '') => {
     return (target: any, propertyKey: string): void => {
-        routeBuilder(path, RouteMethods.get, target, propertyKey);
+        routeBuilder({
+            path,
+            method: RouteMethods.get,
+            target,
+            propertyKey
+        });
     };
 };
 
 export const Post = (path = '') => {
     return (target: any, propertyKey: string): void => {
-        routeBuilder(path, RouteMethods.post, target, propertyKey);
+        routeBuilder({
+            path,
+            method: RouteMethods.post,
+            target,
+            propertyKey
+        });
     };
 };
 
 export const Put = (path = '') => {
     return (target: any, propertyKey: string): void => {
-        routeBuilder(path, RouteMethods.put, target, propertyKey);
+        routeBuilder({
+            path,
+            method: RouteMethods.put,
+            target,
+            propertyKey
+        });
     };
 };
 
 export const Delete = (path = '') => {
     return (target: any, propertyKey: string): void => {
-        routeBuilder(path, RouteMethods.delete, target, propertyKey);
+        routeBuilder({
+            path,
+            method: RouteMethods.delete,
+            target,
+            propertyKey
+        });
     };
 };

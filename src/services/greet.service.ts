@@ -1,6 +1,6 @@
-import {Greet} from '../interfaces/index.js';
-import {Greetings} from '../enum/index.js';
-import {Injectable} from '../decorators/index.js';
+import { Greet } from '../interfaces/index.js';
+import { Greetings } from '../enum/index.js';
+import { Injectable } from '../decorators/index.js';
 
 @Injectable()
 class GreetService {

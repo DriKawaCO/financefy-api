@@ -1,4 +1,4 @@
-type DependencyInjection = {identifier: symbol; service: any};
+type DependencyInjection = { identifier: symbol; service: any };
 
 class DependencyInjector {
     private services: DependencyInjection[];
@@ -10,10 +10,13 @@ class DependencyInjector {
      * Add a new instance of a class into the DI singleton
      * @param dependencyInjection
      */
-    public add({identifier, service}: DependencyInjection): void {
+    public add({ identifier, service }: DependencyInjection): void {
         if (!this.get(identifier)) {
             const serviceInstance = new service();
-            this.services.push({identifier, service: serviceInstance});
+            this.services.push({
+                identifier,
+                service: serviceInstance
+            });
         }
     }
 
@@ -22,7 +25,7 @@ class DependencyInjector {
      * @param serviceIdentifier
      */
     public get(serviceIdentifier: symbol): DependencyInjection | undefined {
-        return this.services.find(({identifier}) => identifier === serviceIdentifier);
+        return this.services.find(({ identifier }) => identifier === serviceIdentifier);
     }
 }
 

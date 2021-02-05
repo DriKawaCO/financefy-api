@@ -1,7 +1,21 @@
-import {RouteParam} from '../interfaces/index.js';
-import {RouteParamType} from '../enum/index.js';
+import { RouteParam } from '../interfaces/index.js';
+import { RouteParamType } from '../enum/index.js';
 
-function routeParamBuilder(type: RouteParamType, target: any, propertyKey: string, index: number, pathName?: string) {
+type RouteParamBuilder = {
+    type: RouteParamType,
+    target: any,
+    propertyKey: string,
+    index: number,
+    pathName?: string
+};
+
+function routeParamBuilder({
+    type,
+    target,
+    propertyKey,
+    index,
+    pathName
+}: RouteParamBuilder) {
     if (!Reflect.hasMetadata('routeParams', target.constructor)) {
         Reflect.defineMetadata('routeParams', [], target.constructor);
     }
@@ -10,25 +24,26 @@ function routeParamBuilder(type: RouteParamType, target: any, propertyKey: strin
     const requestRouteParamIdx = routeParams.findIndex((route) => route.methodName === propertyKey);
     let requestRouteParam = routeParams[requestRouteParamIdx];
 
-    if (!requestRouteParam) {
+    if (requestRouteParam) {
+        requestRouteParam.params.push({
+            index,
+            type,
+            pathName
+        });
+        routeParams[requestRouteParamIdx] = requestRouteParam;
+    }
+    else {
         requestRouteParam = {
             methodName: propertyKey,
             params: [
                 {
                     index,
                     type,
-                    pathName,
-                },
-            ],
+                    pathName
+                }
+            ]
         };
         routeParams.push(requestRouteParam);
-    } else {
-        requestRouteParam.params.push({
-            index,
-            type,
-            pathName,
-        });
-        routeParams[requestRouteParamIdx] = requestRouteParam;
     }
 
     Reflect.defineMetadata('routeParams', routeParams, target.constructor);
@@ -36,30 +51,56 @@ function routeParamBuilder(type: RouteParamType, target: any, propertyKey: strin
 
 export const Req = () => {
     return (target: any, propertyKey: string, index: number): void => {
-        routeParamBuilder(RouteParamType.REQUEST, target, propertyKey, index);
+        routeParamBuilder({
+            type: RouteParamType.REQUEST,
+            target,
+            propertyKey,
+            index
+        });
     };
 };
 
 export const Res = () => {
     return (target: any, propertyKey: string, index: number): void => {
-        routeParamBuilder(RouteParamType.RESPONSE, target, propertyKey, index);
+        routeParamBuilder({
+            type: RouteParamType.RESPONSE,
+            target,
+            propertyKey,
+            index
+        });
     };
 };
 
 export const Body = () => {
     return (target: any, propertyKey: string, index: number): void => {
-        routeParamBuilder(RouteParamType.BODY, target, propertyKey, index);
+        routeParamBuilder({
+            type: RouteParamType.BODY,
+            target,
+            propertyKey,
+            index
+        });
     };
 };
 
 export const Query = () => {
     return (target: any, propertyKey: string, index: number): void => {
-        routeParamBuilder(RouteParamType.QUERY, target, propertyKey, index);
+        routeParamBuilder({
+            type: RouteParamType.QUERY,
+            target,
+            propertyKey,
+            index
+        });
     };
 };
 
 export const Path = (pathName: string) => {
     return (target: any, propertyKey: string, index: number): void => {
-        routeParamBuilder(RouteParamType.PATH, target, propertyKey, index, pathName);
+        routeParamBuilder({
+            type: RouteParamType.PATH,
+            target,
+            propertyKey,
+            index,
+            pathName
+        });
     };
 };

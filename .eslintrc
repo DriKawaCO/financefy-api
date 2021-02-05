@@ -1,6 +1,12 @@
 {
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  "plugins": ["@typescript-eslint", "jest"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "jest"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
@@ -9,23 +15,49 @@
     }
   },
   "rules": {
-    "prefer-template": ["error"],
-    "no-unused-vars": ["error"],
-    "quote-props": ["error", "as-needed"],
-    "eqeqeq": ["error"],
-    "brace-style": ["error", "stroustrup"],
-    "prefer-const": ["error"],
-    "eol-last": ["error", "always"],
+    "prefer-template": [
+      "error"
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error"
+    ],
+    "quote-props": [
+      "error",
+      "as-needed"
+    ],
+    "eqeqeq": [
+      "error"
+    ],
+    "brace-style": [
+      "error",
+      "stroustrup"
+    ],
+    "prefer-const": [
+      "error"
+    ],
+    "eol-last": [
+      "error",
+      "always"
+    ],
     "arrow-parens": 0,
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
     "no-plusplus": [
       "error",
       {
         "allowForLoopAfterthoughts": true
       }
     ],
-    "no-var": ["error"],
-    "curly": ["error", "all"],
+    "no-var": [
+      "error"
+    ],
+    "curly": [
+      "error",
+      "all"
+    ],
     "comma-dangle": [
       "error",
       {
@@ -36,25 +68,68 @@
         "functions": "never"
       }
     ],
-    "semi": ["error", "always"],
+    "semi": [
+      "error",
+      "always"
+    ],
     "no-prototype-builtins": "off",
-    "indent": ["error", 4, { "SwitchCase": 1 }],
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
     "no-confusing-arrow": "off",
     "no-restricted-globals": "off",
-    "no-nested-ternary": ["error"],
-    "no-empty-function": ["error"],
-    "max-statements": ["error", 25],
-    "max-nested-callbacks": ["error", 4],
-    "max-params": ["error", 4],
-    "no-labels": ["error"],
-    "max-depth": ["error"],
-    "no-shadow-restricted-names": ["error"],
-    "no-shadow": ["error"],
-    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
-    "operator-linebreak": ["error", "after"],
-    "object-property-newline": ["error"],
-    "no-negated-condition": ["error"],
-    "no-underscore-dangle": ["error"],
+    "no-nested-ternary": [
+      "error"
+    ],
+    "no-empty-function": [
+      "error"
+    ],
+    "max-statements": [
+      "error",
+      25
+    ],
+    "max-nested-callbacks": [
+      "error",
+      4
+    ],
+    "max-params": [
+      "error",
+      4
+    ],
+    "no-labels": [
+      "error"
+    ],
+    "max-depth": [
+      "error"
+    ],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": [
+      "error"
+    ],
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "operator-linebreak": [
+      "error",
+      "after"
+    ],
+    "object-property-newline": [
+      "error"
+    ],
+    "no-negated-condition": [
+      "error"
+    ],
+    "no-underscore-dangle": [
+      "error"
+    ],
     "no-multiple-empty-lines": [
       "error",
       {
