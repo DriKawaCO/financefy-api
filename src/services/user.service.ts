@@ -1,11 +1,12 @@
-import { Injectable } from '../decorators/index.js';
-import { User, UserModel } from '../interfaces/index.js';
+import {User, UserModel} from '../interfaces/index.js';
+
+import {Injectable} from '../decorators/index.js';
 
 @Injectable()
 export default class UserService {
     /**
      * Create a User
-     * @param user 
+     * @param user
      */
     public create(user: User): Promise<User> {
         return UserModel.create(user);
@@ -13,7 +14,7 @@ export default class UserService {
 
     /**
      * Find a User by Id
-     * @param id 
+     * @param id
      */
     public async findById(id: string): Promise<User | null> {
         return UserModel.findById(id);
@@ -21,7 +22,7 @@ export default class UserService {
 
     /**
      * Update a User by Id
-     * @param id 
+     * @param id
      */
     public async update(id: string, user: User): Promise<User | null> {
         return UserModel.findByIdAndUpdate(id, user);
@@ -29,7 +30,7 @@ export default class UserService {
 
     /**
      * Remove a User by Id
-     * @param id 
+     * @param id
      */
     public async delete(id: string): Promise<boolean> {
         return new Promise((resolve, reject) => {

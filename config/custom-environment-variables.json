@@ -1,0 +1,6 @@
+{
+    "api": {
+        "port": "FINANCEFY_PORT",
+        "dbUrl": "FINANCEFY_DB_URL"
+    }
+}

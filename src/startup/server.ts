@@ -1,4 +1,5 @@
 import App from './app.js';
+import config from 'config';
 import http from 'http';
 
 class Server {
@@ -8,7 +9,7 @@ class Server {
 
     constructor() {
         this.app = new App();
-        this.port = 3000;
+        this.port = config.get<number>('api.port');
         this.server = null;
     }
 

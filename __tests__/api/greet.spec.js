@@ -1,18 +1,7 @@
-import Server from '../../startup/server.js';
 import request from 'supertest';
 
 describe('[API] Greet Route Test Suite', () => {
-    let server: Server;
-    const baseUrl = 'http://localhost:3000';
-
-    beforeAll(async () => {
-        server = new Server();
-        await server.startup();
-    });
-
-    afterAll(() => {
-        server.stop();
-    });
+    const baseUrl = 'http://localhost:5000';
 
     it('should request greet, with proper params', (done) => {
         request(baseUrl)
@@ -98,7 +87,7 @@ describe('[API] Greet Route Test Suite', () => {
             .send('GoodMorning')
             .end((_, response) => {
                 expect(response.status).toEqual(400);
-                expect(response.body.message).toBe('Couldn't greet.');
+                expect(response.body.message).toBe("Couldn't greet.");
                 done();
             });
     });
@@ -112,7 +101,7 @@ describe('[API] Greet Route Test Suite', () => {
             })
             .end((_, response) => {
                 expect(response.status).toEqual(400);
-                expect(response.body.message).toBe('Couldn't greet.');
+                expect(response.body.message).toBe("Couldn't greet.");
                 done();
             });
     });
@@ -125,7 +114,7 @@ describe('[API] Greet Route Test Suite', () => {
             })
             .end((_, response) => {
                 expect(response.status).toEqual(400);
-                expect(response.body.message).toBe('Couldn't greet.');
+                expect(response.body.message).toBe("Couldn't greet.");
                 done();
             });
     });
@@ -141,7 +130,7 @@ describe('[API] Greet Route Test Suite', () => {
             ])
             .end((_, response) => {
                 expect(response.status).toEqual(400);
-                expect(response.body.message).toBe('Couldn't greet.');
+                expect(response.body.message).toBe("Couldn't greet.");
                 done();
             });
     });

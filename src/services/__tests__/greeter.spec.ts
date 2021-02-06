@@ -13,7 +13,7 @@ describe('[Unit] Greet Service Test Suite', () => {
         const greetService = new GreetService();
         const greet: Greet = {
             greeting: Greetings.GoodEvening,
-            speaker: 'Jaime',
+            speaker: 'Jaime'
         };
         greetService.greet(greet);
         expect(greetService.getLastGreeting()).toBe(Greetings.GoodEvening);
@@ -25,7 +25,7 @@ describe('[Unit] Greet Service Test Suite', () => {
         const greetService = new GreetService();
         const greet: Greet = {
             greeting: Greetings.GoodEvening,
-            speaker: '',
+            speaker: ''
         };
         expect(() => greetService.greet(greet)).toThrow();
     });

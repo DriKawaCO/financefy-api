@@ -1,8 +1,8 @@
+import {AuthToken} from './auth-token.interface.js';
 import mongoose from 'mongoose';
-import { AuthToken } from './auth-token.interface.js';
 
-export interface User extends mongoose.Document {
-    _id: any;
+export interface User {
+    _id?: any;
     email: string;
     firstName: string;
     lastName: string;
@@ -10,26 +10,33 @@ export interface User extends mongoose.Document {
     authTokens?: AuthToken['_id'][];
 }
 
-const UserSchema: mongoose.Schema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
-    hashToken: {
-        type: String
-    },
-    authTokens: [{
-        type: mongoose.Schema.Types.ObjectId
-    }]
-}, { timestamps: true });
+interface UserDocument extends User, mongoose.Document {}
 
-export const UserModel = mongoose.model<User>('User', UserSchema);
+const UserSchema: mongoose.Schema = new mongoose.Schema(
+    {
+        email: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        firstName: {
+            type: String,
+            required: true
+        },
+        lastName: {
+            type: String,
+            required: true
+        },
+        hashToken: {
+            type: String
+        },
+        authTokens: [
+            {
+                type: mongoose.Schema.Types.ObjectId
+            }
+        ]
+    },
+    {timestamps: true}
+);
+
+export const UserModel = mongoose.model<UserDocument>('User', UserSchema);

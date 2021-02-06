@@ -1,8 +1,7 @@
 module.exports = {
-    globalSetup: './jest.setup.cjs',
-    globalTeardown: './jest.teardown.cjs',
-    testEnvironment: './mongo-environment.cjs',
-    roots: ['<rootDir>/dist'],
+    globalSetup: './__tests__/setup.cjs',
+    globalTeardown: './__tests__/teardown.cjs',
+    testEnvironment: 'node',
     transform: {
         '^.+\\.jsx?$': 'babel-jest'
     },
@@ -20,5 +19,6 @@ module.exports = {
         'dist/**/*.{js,jsx}',
         '!dist/**/index.{js,jsx}',
         '!dist/startup/**/*.{js,jsx}'
-    ]
+    ],
+    coverageDirectory: '__tests__/unit/coverage'
 };
